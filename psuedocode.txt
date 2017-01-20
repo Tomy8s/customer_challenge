@@ -1,0 +1,46 @@
+Pseudo-code:
+
+QuestionA
+
+For each row from table
+	select row and call it x
+	Until second last row
+		Select following row and call it y
+		if (
+			product x equals product y and 
+			customer x equals customer y and 
+			measure x equals measure y and (
+			(valid from day x is after valid from day y and before valid to day y) or 
+			(valid to day x is after valid from day y and before valid to day y) or
+			(valid from day x is before valid from day y and valid to day x is after valid to day y) or
+			(valid from day y is after valid from day x and before valid to day x) or
+			(valid to day y is after valid from day x and before valid to day x) or
+			(valid from day y is before valid from day x and valid to day y is after valid to day x)
+		) then
+			mark x as overlapping with y
+			mark y as overlapping with x
+		full stop for if.
+	full stop for until.
+full stop for for.
+
+QuestionB
+
+For each row marked as overlapping
+	if ((valid from day y is before valid from day x) and (valid to day y is before valid to day x)) then
+		change valid to day y to the day before valid from day x
+	else if (valid from day y is before valid from day x) then
+		x is completely overlapped and can be removed
+	else if ((valid from day x is before valid from day y) and (valid to day x is before valid to day y)) then
+		change valid to day x to the day before valid from day y
+	else if (valid from day x is before valid from day y) then
+		y is completely overlapped and can be removed
+	full stop for if
+full stop for for.
+
+QuestionC
+
+This assumes exact matches for product, customer and measure.
+This assumes understandably formatted dates are given.
+This assumes valid from dates precede valid to dates of the respective item.
+this ignores differences in values for overlapping days
+This completely removes data when a product is completely overlapped.
